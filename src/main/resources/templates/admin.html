@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">管理员页面</a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto nav" role="tablist">
+        <li class="nav-item ">
+          <a class="nav-link active" href="#answered" role="tab" data-toggle="tab" aria-selected="true">举报管理</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#unanswered" role="tab" data-toggle="tab" aria-selected="false">用户总览</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#deleted" role="tab" data-toggle="tab" aria-selected="false">查找用户</a>
+        </li>
+      </ul>
+      <a class="navbar-brand" href="#">
+        <img id="head" width="30" height="30" class="d-inline-block align-top"
+          alt="">
+        [[${user.username}]]
+      </a>
+    </div>
+  </nav>
+  <div class="container-fluid">
+        <div class="tab-content" id="myTabContent" style="margin-right: -15px; margin-left: -15px;">
+          <div class="tab-pane fade show active" id="answered" role="tabpanel">
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">序号</th>
+                  <th scope="col">举报人ID</th>
+                  <th scope="col">被举报人ID</th>
+                  <th scope="col">提问内容</th>
+                  <th scope="col">举报原因</th>
+                  <th scope="col">操作</th>
+                </tr>
+              </thead>
+              <tbody id="c">
+              </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" id="cprevious">上一页</a></li>
+                <li class="page-item"><a class="page-link" id="cnext">下一页</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div class="tab-pane fade " id="unanswered" role="tabpanel" >
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">序号</th>
+                  <th scope="col">用户名</th>
+                  <th scope="col">用户邮箱</th>
+                  <th scope="col">激活状态</th>
+                  <th scope="col">封禁状态</th>
+                  <th scope="col">提问箱的问题数</th>
+                  <th scope="col">提问的数量</th>
+                  <th scope="col">回复提问的数量</th>
+                </tr>
+              </thead>
+              <tbody id="user">
+              </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" id="uprevious">上一页</a></li>
+                <li class="page-item"><a class="page-link" id="unext">下一页</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div class="tab-pane fade " id="deleted" role="tabpanel">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <a class="navbar-brand" href="#">查找用户</a>
+              <div class="collapse navbar-collapse" id="navbar">
+                  <select class="form-control my-1 mr-sm-2" id="method" style="display: inline-block;width: 20%;">
+                    <option selected value="1">请选择搜索方式</option>
+                    <option value="1">用户名</option>
+                    <option value="2">邮箱</option>
+                  </select>
+                  <input class="form-control mr-sm-2" type="search" placeholder="用户名或邮箱" style="display: inline-block;width: 50%;" id="username">
+                  <button class="btn btn-outline-success my-2 my-sm-0" onclick="s(1)">查找</button>
+              </div>
+            </nav>
+            <table class="table">
+              <thead class="thead-light">
+              <tr>
+                <th scope="col">序号</th>
+                <th scope="col">用户名</th>
+                <th scope="col">用户邮箱</th>
+                <th scope="col">激活状态</th>
+                <th scope="col">封禁状态</th>
+                <th scope="col">提问箱的问题数</th>
+                <th scope="col">提问的数量</th>
+                <th scope="col">回复提问的数量</th>
+                <th scope="col">操作</th>
+              </tr>
+              </thead>
+              <tbody id="info">
+              </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" id="sprevious">上一页</a></li>
+                <li class="page-item"><a class="page-link" id="snext">下一页</a></li>
+              </ul>
+            </nav>
+            <div style="display: none" id="hi">
+            <table class="table" id="questions">
+              <thead class="thead-light">
+              <tr>
+                <th scope="col">序号</th>
+                <th scope="col">提问用户名</th>
+                <th scope="col">提问用户邮箱</th>
+                <th scope="col">回答用户名</th>
+                <th scope="col">回答用户邮箱</th>
+                <th scope="col">问题</th>
+                <th scope="col">回答</th>
+              </tr>
+              </thead>
+              <tbody id="q">
+              </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" id="qprevious">上一页</a></li>
+                <li class="page-item"><a class="page-link" id="qnext">下一页</a></li>
+              </ul>
+            </nav>
+            </div>
+          </div>
+        </div>
+  </div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.5.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script th:src="@{~/static/js/admin.js}"></script>
+</html>

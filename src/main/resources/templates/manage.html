@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">提问箱管理</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto nav " role="tablist">
+        <li class="nav-item ">
+          <a class="nav-link active" href="#answered" role="tab" data-toggle="tab" aria-selected="true">已回复的提问</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#unanswered" role="tab" data-toggle="tab" aria-selected="false">未回复的提问</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#deleted" role="tab" data-toggle="tab" aria-selected="false">已删除的提问</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#blocks" role="tab" data-toggle="tab" aria-selected="false">我的黑名单</a>
+        </li>
+      </ul>
+      <a class="navbar-brand" href="#">
+        <img id="head" width="30" height="30" class="d-inline-block align-top"
+          alt="">
+        [[${user.username}]]
+      </a>
+    </div>
+  </nav>
+  <div class="container-fluid">
+        <div class="tab-content" id="myTabContent" style="margin-right: -15px; margin-left: -15px;">
+          <div class="tab-pane fade show active" id="answered" role="tabpanel">
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">序号</th>
+                  <th scope="col">提问</th>
+                  <th scope="col">回答</th>
+                  <th scope="col">操作</th>
+                </tr>
+              </thead>
+              <tbody id="a">
+              </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" id="aprevious">上一页</a></li>
+                <li class="page-item"><a class="page-link" id="anext">下一页</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div class="tab-pane fade " id="unanswered" role="tabpanel" >
+            <table class="table">
+              <thead class="thead-light">
+              <tr>
+                <th scope="col">序号</th>
+                <th scope="col">提问</th>
+                <th scope="col">回答</th>
+                <th scope="col">操作</th>
+              </tr>
+              </thead>
+              <tbody id="u">
+              </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" id="uprevious">上一页</a></li>
+                <li class="page-item"><a class="page-link" id="unext">下一页</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div class="tab-pane fade " id="deleted" role="tabpanel">
+            <table class="table">
+              <thead class="thead-light">
+              <tr>
+                <th scope="col">序号</th>
+                <th scope="col">提问</th>
+                <th scope="col">回答</th>
+                <th scope="col">操作</th>
+              </tr>
+              </thead>
+              <tbody id="d">
+              </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" id="dprevious">上一页</a></li>
+                <li class="page-item"><a class="page-link" id="dnext">下一页</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div class="tab-pane fade " id="blocks" role="tabpanel">
+            <table class="table">
+              <thead class="thead-light">
+              <tr>
+                <th scope="col">序号</th>
+                <th scope="col">问题内容</th>
+                <th scope="col">操作</th>
+              </tr>
+              </thead>
+              <tbody id="b">
+              </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" id="bprevious">上一页</a></li>
+                <li class="page-item"><a class="page-link" id="bnext">下一页</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+  </div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.5.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script th:src="@{~/static/js/manage.js}"></script>
+</html>
