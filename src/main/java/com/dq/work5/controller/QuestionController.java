@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dq.work5.mapper.BlockMapper;
 import com.dq.work5.mapper.QuestionMapper;
+import com.dq.work5.mapper.QuestionVoMapper;
 import com.dq.work5.pojo.*;
 import com.dq.work5.service.BlockService;
 import com.dq.work5.service.QuestionService;
@@ -35,6 +36,8 @@ public class QuestionController {
     UserService userServiceImpl;
     @Autowired
     BlockService blockServiceImpl;
+    @Autowired
+    QuestionVoMapper questionVoMapper;
     private static final Logger logger = LoggerFactory.getLogger(QuestionController.class);
     /**
      * 根据用户名发送提问
@@ -213,24 +216,19 @@ public class QuestionController {
     }
 
     /**
-     * 查看用户已被回复的提问的分页,每页8条数据
+     * 查看用户已被回复的提问的分页,每页3条数据
      * @param pageNum
      * @param request
      * @return
      */
     @RequiresRoles("user")
     @PostMapping("/question/getAnswered")
-    public IPage<Question> getAnsweredQuestions(int pageNum,HttpServletRequest request){
+    public IPage<QuestionVo> getAnsweredQuestions(int pageNum,HttpServletRequest request){
         int id = JwtUtil.getId(request.getHeader("Authorization"));
         User user = userServiceImpl.getById(id);
         if(!user.isActive()||!user.isAccept()||user.isBanned())return null;                              //如果用户未激活、未开启提问箱、已封禁不会返回任何数据
-        QueryWrapper<Question> questionQueryWrapper = new QueryWrapper<>();
-        questionQueryWrapper.eq("uid",id).ne("answer","").eq("deleted",false);//查找内容改用户发起的,不为空,且未被删除的提问
-        Page<Question> page = new Page<>(pageNum,3);
-        IPage<Question> iPage = questionServiceImpl.page(page,questionQueryWrapper);
-        for(Question question:iPage.getRecords()){                                                         //提问ID不能返回
-            question.setUid(0);
-        }
+        Page<QuestionVo> page = new Page<>(pageNum,3);
+        IPage<QuestionVo> iPage = questionVoMapper.getSendedAndAnsweredQuestions(page,id);
         return iPage;
     }
 

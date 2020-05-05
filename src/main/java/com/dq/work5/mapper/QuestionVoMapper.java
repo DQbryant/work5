@@ -24,4 +24,7 @@ public interface QuestionVoMapper {
     @Select("select u1.username,u1.email,u2.username ausername,u2.email aemail,q.content,q.answer " +
             "from user u1,user u2,question q where u1.id=q.uid and u2.id=q.aid and q.uid=#{id} group by q.id")
     IPage<QuestionVo> getSendedQuestions(@Param("page") Page<?> page,@Param("id") int id);
+    @Select("select u1.username,u1.email,u2.username ausername,u2.email aemail,q.content,q.answer " +
+            "from user u1,user u2,question q where u1.id=q.uid and u2.id=q.aid and q.uid=#{id} and q.answer!=''  group by q.id")
+    IPage<QuestionVo> getSendedAndAnsweredQuestions(@Param("page") Page<?> page,@Param("id") int id);
 }

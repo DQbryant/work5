@@ -131,7 +131,7 @@ $(function () {
             answered.html("");
             $.each(result.records,function (index,q) {
                 var i = (num-1)*3+index+1;
-                answered.append("<tr><th scope=\"row\">"+i+"</th>"+"<td>"+q.aid+"</td>"+"<td>"+q.content+"</td>"+"<td>"+q.answer+"</td></tr>")
+                answered.append("<tr><th scope=\"row\">"+i+"</th>"+"<td>"+q.ausername+"</td><td>"+q.aemail+"</td><td>"+q.content+"</td>"+"<td>"+q.answer+"</td></tr>")
             });
             total = result.pages;
         }
@@ -152,7 +152,7 @@ $(function () {
                 answered.html("");
                 $.each(result.records,function (index,q) {
                     var i = (num-2)*3+index+1;
-                    answered.append("<tr><th scope=\"row\">"+i+"</th>"+"<td>"+q.aid+"</td>"+"<td>"+q.content+"</td>"+"<td>"+q.answer+"</td></tr>")
+                    answered.append("<tr><th scope=\"row\">"+i+"</th>"+"<td>"+q.ausername+"</td><td>"+q.aemail+"</td><td>"+q.content+"</td>"+"<td>"+q.answer+"</td></tr>")
                 });
                 num = result.current;
             }
@@ -174,7 +174,7 @@ $(function () {
                 answered.html("");
                 $.each(result.records,function (index,q) {
                     var i = num*3+index+1;
-                    answered.append("<tr><th scope=\"row\">"+i+"</th>"+"<td>"+q.aid+"</td>"+"<td>"+q.content+"</td>"+"<td>"+q.answer+"</td></tr>")
+                    answered.append("<tr><th scope=\"row\">"+i+"</th>"+"<td>"+q.ausername+"</td><td>"+q.aemail+"</td><td>"+q.content+"</td>"+"<td>"+q.answer+"</td></tr>")
                 });
                 num = result.current;
             }
