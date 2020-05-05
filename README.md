@@ -1,7 +1,7 @@
 # 西二在线第五轮考核
 ## 项目实现的是匿名提问箱。
 ### 可以上我的服务器上访问测试哦：http://47.115.37.228:8848/ 
-### github地址:
+### github地址:https://github.com/DQbryant/work5.git
 
 ## 使用技术：
 ### 前端：Thymeleaf+Bootstrap(时间实在是不够了没法上vue)
